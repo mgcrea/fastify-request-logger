@@ -1,0 +1,45 @@
+{
+  "name": "@mgcrea/fastify-request-logger",
+  "version": "0.2.0",
+  "description": "Compact request logger plugin for fastify written in TypeScript",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "author": "Olivier Louvignes <olivier@mgcrea.io>",
+  "repository": "github:mgcrea/fastify-request-logger",
+  "license": "MIT",
+  "access": "public",
+  "scripts": {
+    "build": "rm -rf lib/*; tsc --build",
+    "test": "jest",
+    "typecheck": "tsc --noEmit",
+    "prettycheck": "prettier --check 'src/' --check 'test/'",
+    "lint": "eslint src/ test/",
+    "prepare": "npm run build"
+  },
+  "keywords": [
+    "fastify",
+    "request",
+    "logger"
+  ],
+  "devDependencies": {
+    "@tsconfig/node10": "^1.0.7",
+    "@types/ioredis": "^4.19.2",
+    "@types/node": "^14.14.22",
+    "@typescript-eslint/eslint-plugin": "^4.14.0",
+    "@typescript-eslint/parser": "^4.14.0",
+    "eslint": "^7.18.0",
+    "eslint-config-prettier": "^7.2.0",
+    "eslint-plugin-jest": "^24.1.3",
+    "eslint-plugin-prettier": "^3.3.1",
+    "fastify": "^3.10.1",
+    "jest": "^26.6.3",
+    "pino-pretty": "^4.3.0",
+    "prettier": "^2.2.1",
+    "ts-jest": "^26.4.4",
+    "typescript": "^4.1.3"
+  },
+  "dependencies": {
+    "chalk": "^4.1.0",
+    "fastify-plugin": "^3.0.0"
+  }
+}
