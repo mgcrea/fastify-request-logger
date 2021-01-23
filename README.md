@@ -42,16 +42,6 @@ export const buildFastify = (options: FastifyServerOptions = {}): FastifyInstanc
 
 - [Olivier Louvignes](https://github.com/mgcrea) <<olivier@mgcrea.io>>
 
-### Credits
-
-Heavily inspired from
-
-- [fastify-secure-session](https://github.com/fastify/fastify-secure-session) by
-  [Matteo Collina](https://github.com/mcollina)
-- [fastify-request-logger](https://github.com/SerayaEryn/fastify-request-logger) by
-  [Denis Fäcke](https://github.com/SerayaEryn)
-- [express-session](https://github.com/expressjs/session) by [Douglas Wilson](https://github.com/dougwilson)
-
 ## License
 
 ```
