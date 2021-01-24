@@ -2,11 +2,11 @@ import chalk from 'chalk';
 import type { FastifyPluginAsync } from 'fastify';
 
 export type FastifyRequestLoggerOptions = {
-  logBody: boolean;
-  logBindings: Record<string, unknown>;
+  logBody?: boolean;
+  logBindings?: Record<string, unknown>;
 };
 
-export const plugin: FastifyPluginAsync<FastifyRequestLoggerOptions> = async (fastify, options): Promise<void> => {
+export const plugin: FastifyPluginAsync<FastifyRequestLoggerOptions> = async (fastify, options = {}): Promise<void> => {
   const { logBody = true, logBindings = { plugin: 'fastify-request-logger' } } = options;
 
   fastify.addHook('onRequest', async (request) => {
