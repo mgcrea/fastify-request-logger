@@ -15,6 +15,12 @@ Compact request logger plugin for [fastify](https://github.com/fastify/fastify).
 - Built with [TypeScript](https://www.typescriptlang.org/) for static type checking with exported types along the
   library.
 
+## Preview
+
+<p align="left">
+  <img src="https://raw.githubusercontent.com/mgcrea/pino-pretty-compact/master/docs/preview.png" alt="Preview" />
+</p>
+
 ## Usage
 
 ```bash
