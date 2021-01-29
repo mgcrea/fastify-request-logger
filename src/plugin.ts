@@ -19,8 +19,15 @@ export const plugin: FastifyPluginAsync<FastifyRequestLoggerOptions> = async (fa
         contentLength ? ` with a ${chalk.yellow(contentLength)}-length body` : ''
       }`
     );
-    request.log.trace({ request }, `Request trace`);
+    request.log.trace({ ...logBindings, req: request }, `Request trace`);
   });
+
+  fastify.addHook('preHandler', async (request) => {
+    if (request.body && logBody) {
+      request.log.debug({ ...logBindings, body: request.body }, `Request body`);
+    }
+  });
+
   fastify.addHook('onResponse', async (request, reply) => {
     request.log.info(
       logBindings,
@@ -28,11 +35,5 @@ export const plugin: FastifyPluginAsync<FastifyRequestLoggerOptions> = async (fa
         request.url
       )} response with a ${chalk.magenta(reply.statusCode)}-status`
     );
-  });
-
-  fastify.addHook('preHandler', async (req) => {
-    if (req.body && logBody) {
-      req.log.debug(logBindings, `Request body: ${chalk.gray(JSON.stringify(req.body))}`);
-    }
   });
 };
