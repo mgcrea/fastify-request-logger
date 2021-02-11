@@ -27,5 +27,13 @@ export const buildFastify = (options: BuilfFastifyOptions = {}): FastifyInstance
     reply.send({ hello: 'world', method: request.method });
   });
 
+  fastify.get('/healthz', (request, reply) => {
+    reply.send({ ok: 1 });
+  });
+
+  fastify.get('/users/:user', (request, reply) => {
+    reply.send({ ok: 1 });
+  });
+
   return fastify;
 };

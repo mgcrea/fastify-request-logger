@@ -5,7 +5,7 @@ describe('with fastify path', () => {
     ['payload', { foo: 'bar' }],
     ['token', 'abc'],
   ]);
-  const fastify = buildFastify({});
+  const fastify = buildFastify({ requestLogger: { ignoredPaths: ['/healthz'] } });
   afterAll(() => {
     fastify.close();
   });
@@ -24,6 +24,26 @@ describe('with fastify path', () => {
       method: 'POST',
       url: '/',
       payload: context.get('payload'),
+    });
+    expect(response.statusCode).toEqual(200);
+  });
+  it('should properly ignore a specified request', async () => {
+    const response = await fastify.inject({
+      method: 'GET',
+      url: '/healthz',
+      headers: {
+        authorization: `Bearer ${context.get('token')}`,
+      },
+    });
+    expect(response.statusCode).toEqual(200);
+  });
+  it('should properly support request with params', async () => {
+    const response = await fastify.inject({
+      method: 'GET',
+      url: '/users/1',
+      headers: {
+        authorization: `Bearer ${context.get('token')}`,
+      },
     });
     expect(response.statusCode).toEqual(200);
   });
