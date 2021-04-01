@@ -1,17 +1,26 @@
 import chalk from 'chalk';
-import type { FastifyPluginAsync } from 'fastify';
+import type { FastifyPluginAsync, FastifyRequest } from 'fastify';
 
 export type FastifyRequestLoggerOptions = {
   logBody?: boolean;
   logBindings?: Record<string, unknown>;
   ignoredPaths?: Array<string>;
+  ignore?: (request: FastifyRequest) => boolean;
 };
 
 export const plugin: FastifyPluginAsync<FastifyRequestLoggerOptions> = async (fastify, options = {}): Promise<void> => {
-  const { logBody = true, logBindings = { plugin: 'fastify-request-logger' }, ignoredPaths = [] } = options;
+  const { logBody = true, logBindings = { plugin: 'fastify-request-logger' }, ignoredPaths = [], ignore } = options;
+
+  const isIgnoredRequest = (request: FastifyRequest): boolean => {
+    const { routerPath } = request;
+    if (ignoredPaths.includes(routerPath)) {
+      return true;
+    }
+    return ignore ? ignore(request) : false;
+  };
 
   fastify.addHook('onRequest', async (request) => {
-    if (ignoredPaths.includes(request.routerPath)) {
+    if (isIgnoredRequest(request)) {
       return;
     }
     const contentLength = request.headers['content-length'];
@@ -27,7 +36,7 @@ export const plugin: FastifyPluginAsync<FastifyRequestLoggerOptions> = async (fa
   });
 
   fastify.addHook('preHandler', async (request) => {
-    if (ignoredPaths.includes(request.routerPath)) {
+    if (isIgnoredRequest(request)) {
       return;
     }
     if (request.body && logBody) {
@@ -36,7 +45,7 @@ export const plugin: FastifyPluginAsync<FastifyRequestLoggerOptions> = async (fa
   });
 
   fastify.addHook('onResponse', async (request, reply) => {
-    if (ignoredPaths.includes(request.routerPath)) {
+    if (isIgnoredRequest(request)) {
       return;
     }
     request.log.info(
