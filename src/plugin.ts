@@ -1,19 +1,30 @@
 import chalk from 'chalk';
 import type { FastifyPluginAsync, FastifyRequest } from 'fastify';
+import type { Bindings } from 'pino';
 
 export type FastifyRequestLoggerOptions = {
   logBody?: boolean;
   logBindings?: Record<string, unknown>;
   ignoredPaths?: Array<string>;
+  ignoredBindings?: Record<string, unknown>;
   ignore?: (request: FastifyRequest) => boolean;
 };
 
 export const plugin: FastifyPluginAsync<FastifyRequestLoggerOptions> = async (fastify, options = {}): Promise<void> => {
-  const { logBody = true, logBindings = { plugin: 'fastify-request-logger' }, ignoredPaths = [], ignore } = options;
+  const {
+    logBody = true,
+    logBindings = { plugin: 'fastify-request-logger' },
+    ignoredPaths = [],
+    ignore,
+    ignoredBindings,
+  } = options;
 
   const isIgnoredRequest = (request: FastifyRequest): boolean => {
-    const { routerPath } = request;
+    const { routerPath, log } = request;
     if (ignoredPaths.includes(routerPath)) {
+      if (ignoredBindings) {
+        log.setBindings(ignoredBindings);
+      }
       return true;
     }
     return ignore ? ignore(request) : false;
@@ -56,3 +67,9 @@ export const plugin: FastifyPluginAsync<FastifyRequestLoggerOptions> = async (fa
     );
   });
 };
+
+declare module 'fastify' {
+  interface FastifyLoggerInstance {
+    setBindings(bindings: Bindings): void;
+  }
+}
