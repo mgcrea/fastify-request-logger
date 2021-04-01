@@ -20,11 +20,8 @@ export const plugin: FastifyPluginAsync<FastifyRequestLoggerOptions> = async (fa
   } = options;
 
   const isIgnoredRequest = (request: FastifyRequest): boolean => {
-    const { routerPath, log } = request;
+    const { routerPath } = request;
     if (ignoredPaths.includes(routerPath)) {
-      if (ignoredBindings) {
-        log.setBindings(ignoredBindings);
-      }
       return true;
     }
     return ignore ? ignore(request) : false;
@@ -32,6 +29,9 @@ export const plugin: FastifyPluginAsync<FastifyRequestLoggerOptions> = async (fa
 
   fastify.addHook('onRequest', async (request) => {
     if (isIgnoredRequest(request)) {
+      if (ignoredBindings) {
+        request.log.setBindings(ignoredBindings);
+      }
       return;
     }
     const contentLength = request.headers['content-length'];
