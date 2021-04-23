@@ -24,9 +24,9 @@ Compact request logger plugin for [fastify](https://github.com/fastify/fastify).
 ## Usage
 
 ```bash
-npm install fastify-cookie @mgcrea/fastify-request-logger --save
+npm install @mgcrea/fastify-request-logger --save
 # or
-yarn add fastify-cookie @mgcrea/fastify-request-logger
+yarn add @mgcrea/fastify-request-logger
 ```
 
 You probably want to disable fastify own request logging using the `disableRequestLogging` option.
