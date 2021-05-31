@@ -24,9 +24,9 @@ Compact request logger plugin for [fastify](https://github.com/fastify/fastify).
 ## Usage
 
 ```bash
-npm install @mgcrea/fastify-request-logger --save
+npm install @mgcrea/fastify-request-logger @mgcrea/pino-pretty-compact --save
 # or
-yarn add @mgcrea/fastify-request-logger
+yarn add @mgcrea/fastify-request-logger @mgcrea/pino-pretty-compact
 ```
 
 You probably want to disable fastify own request logging using the `disableRequestLogging` option.
@@ -37,7 +37,11 @@ import fastifyRequestLogger from '@mgcrea/fastify-request-logger';
 import prettifier from '@mgcrea/pino-pretty-compact';
 
 export const buildFastify = (options: FastifyServerOptions = {}): FastifyInstance => {
-  const fastify = createFastify({ logger: { prettyPrint: true, prettifier }, disableRequestLogging: true, ...options });
+  const fastify = createFastify({
+    logger: { prettyPrint: true, prettifier },
+    disableRequestLogging: true,
+    ...options,
+  });
 
   fastify.register(fastifyRequestLogger);
 
