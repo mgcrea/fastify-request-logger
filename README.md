@@ -34,9 +34,10 @@ You probably want to disable fastify own request logging using the `disableReque
 ```ts
 import createFastify, { FastifyInstance, FastifyServerOptions } from 'fastify';
 import fastifyRequestLogger from '@mgcrea/fastify-request-logger';
+import prettifier from '@mgcrea/pino-pretty-compact';
 
 export const buildFastify = (options: FastifyServerOptions = {}): FastifyInstance => {
-  const fastify = createFastify({ disableRequestLogging: true, ...options });
+  const fastify = createFastify({ logger: { prettyPrint: true, prettifier }, disableRequestLogging: true, ...options });
 
   fastify.register(fastifyRequestLogger);
 
@@ -50,7 +51,7 @@ export const buildFastify = (options: FastifyServerOptions = {}): FastifyInstanc
 
 ## License
 
-```
+```txt
 The MIT License
 
 Copyright (c) 2020 Olivier Louvignes <olivier@mgcrea.io>
