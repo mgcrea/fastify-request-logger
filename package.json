@@ -9,12 +9,14 @@
   "license": "MIT",
   "access": "public",
   "scripts": {
-    "build": "rm -rf lib/*; tsc --build",
-    "test": "jest",
-    "typecheck": "tsc --noEmit",
-    "prettycheck": "prettier --check 'src/' --check 'test/'",
+    "start": "npm run spec -- --watch",
+    "build": "rimraf lib/*; tsc --build",
     "lint": "eslint src/ test/",
-    "prepare": "npm run build"
+    "prettycheck": "prettier --check src/ test/",
+    "typecheck": "tsc --noEmit",
+    "spec": "DEBUG=fastify-session*,prisma-query jest --runInBand",
+    "test": "npm run lint && npm run prettycheck && npm run typecheck && npm run spec",
+    "prepublishOnly": "npm run build"
   },
   "keywords": [
     "fastify",

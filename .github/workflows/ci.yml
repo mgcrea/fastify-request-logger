@@ -1,33 +1,52 @@
-name: ci
+name: main
 
-on: [push, pull_request]
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+  workflow_dispatch:
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
-        node-version: [10.x, 12.x, 14.x]
-
-    services:
-      redis:
-        image: redis:latest
-        ports:
-        - 6379:6379
-        options: --entrypoint redis-server
-
+        node: ['10', '12', '14', '16']
+    name: Test on node@v${{ matrix.node }}
     steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2-beta
+      - name: Checkout 🛎️
+        uses: actions/checkout@v2
+      - name: Setup 🔧
+        uses: actions/setup-node@v2
         with:
-          node-version: ${{ matrix.node-version }}
-      - run: npm install
-      - run: npm build
-      - run: npm test
-        env:
-          CI: true
-      - run: npm run lint
-      - run: npm run prettycheck
-
+          node-version: ${{ matrix.node }}
+          check-latest: true
+          cache: 'npm'
+      - name: Install 🪄
+        run: npm ci
+      - name: Lint 🔍
+        run: npm run lint
+      - name: Prettier 🔍
+        run: npm run prettycheck
+      - name: TypeScript 🔍
+        run: npm run typecheck
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: ['10', '12', '14', '16']
+    name: Build on node@v${{ matrix.node }}
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v2
+      - name: Setup 🔧
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node }}
+          check-latest: true
+          cache: 'npm'
+      - name: Install 🪄
+        run: npm ci
+      - name: Build 💎
+        run: npm run build
