@@ -1,15 +1,18 @@
-import createFastify, { FastifyInstance, FastifyLoggerOptions, FastifyServerOptions } from 'fastify';
+import createFastify, { FastifyInstance, FastifyServerOptions } from 'fastify';
 import fastifyRequestLogger, { FastifyRequestLoggerOptions } from 'src/index';
 
 type BuilfFastifyOptions = FastifyServerOptions & { requestLogger?: FastifyRequestLoggerOptions };
 
-const logger: FastifyLoggerOptions = {
+const logger: FastifyServerOptions['logger'] = {
   level: 'debug',
-  prettyPrint: {
-    colorize: true,
-    ignore: 'pid,hostname',
-    translateTime: 'yyyy-mm-dd HH:MM:ss.l',
-    levelFirst: true,
+  transport: {
+    target: 'pino-pretty',
+    options: {
+      colorize: true,
+      translateTime: 'yyyy-mm-dd HH:MM:ss.l',
+      ignore: 'pid,hostname',
+      levelFirst: true,
+    },
   },
 };
 
