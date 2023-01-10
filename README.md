@@ -14,6 +14,7 @@
   <a href="https://www.npmjs.com/package/@mgcrea/fastify-request-logger">
     <img src="https://img.shields.io/npm/l/@mgcrea/fastify-request-logger.svg?style=for-the-badge" alt="npm license" />
   </a>
+  <br />
   <a href="https://github.com/mgcrea/fastify-request-logger/actions/workflows/main.yml">
     <img src="https://img.shields.io/github/actions/workflow/status/mgcrea/fastify-request-logger/main.yml?style=for-the-badge&branch=master" alt="build status" />
   </a>
