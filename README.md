@@ -2,19 +2,19 @@
 
 <!-- markdownlint-disable MD033 -->
 <p align="center">
-  <a href="https://www.npmjs.com/package/@mgcrea/fastify-session-sodium-crypto">
-    <img src="https://img.shields.io/npm/v/@mgcrea/fastify-session-sodium-crypto.svg?style=for-the-badge" alt="npm version" />
+  <a href="https://www.npmjs.com/package/@mgcrea/fastify-request-logger">
+    <img src="https://img.shields.io/npm/v/@mgcrea/fastify-request-logger.svg?style=for-the-badge" alt="npm version" />
   </a>
-  <a href="https://www.npmjs.com/package/@mgcrea/fastify-session-sodium-crypto">
-    <img src="https://img.shields.io/npm/dt/@mgcrea/fastify-session-sodium-crypto.svg?style=for-the-badge" alt="npm total downloads" />
+  <a href="https://www.npmjs.com/package/@mgcrea/fastify-request-logger">
+    <img src="https://img.shields.io/npm/dt/@mgcrea/fastify-request-logger.svg?style=for-the-badge" alt="npm total downloads" />
   </a>
-  <a href="https://www.npmjs.com/package/@mgcrea/fastify-session-sodium-crypto">
-    <img src="https://img.shields.io/npm/dm/@mgcrea/fastify-session-sodium-crypto.svg?style=for-the-badge" alt="npm monthly downloads" />
+  <a href="https://www.npmjs.com/package/@mgcrea/fastify-request-logger">
+    <img src="https://img.shields.io/npm/dm/@mgcrea/fastify-request-logger.svg?style=for-the-badge" alt="npm monthly downloads" />
   </a>
-  <a href="https://www.npmjs.com/package/@mgcrea/fastify-session-sodium-crypto">
-    <img src="https://img.shields.io/npm/l/@mgcrea/fastify-session-sodium-crypto.svg?style=for-the-badge" alt="npm license" />
+  <a href="https://www.npmjs.com/package/@mgcrea/fastify-request-logger">
+    <img src="https://img.shields.io/npm/l/@mgcrea/fastify-request-logger.svg?style=for-the-badge" alt="npm license" />
   </a>
-  <a href="https://github.com/mgcrea/fastify-session-sodium-crypto/actions/workflows/main.yml">
+  <a href="https://github.com/mgcrea/fastify-request-logger/actions/workflows/main.yml">
     <img src="https://img.shields.io/github/actions/workflow/status/mgcrea/fastify-request-logger/main.yml?style=for-the-badge&branch=master" alt="build status" />
   </a>
     <a href="https://depfu.com/github/mgcrea/fastify-request-logger">
