@@ -5,7 +5,7 @@ import type pino from 'pino';
 export type FastifyRequestLoggerOptions = {
   logBody?: boolean;
   logBindings?: Record<string, unknown>;
-  ignoredPaths?: Array<string>;
+  ignoredPaths?: Array<string | RegExp>;
   ignoredBindings?: Record<string, unknown>;
   ignore?: (request: FastifyRequest) => boolean;
 };
@@ -21,7 +21,15 @@ export const plugin: FastifyPluginAsync<FastifyRequestLoggerOptions> = async (fa
 
   const isIgnoredRequest = (request: FastifyRequest): boolean => {
     const { routerPath } = request;
-    if (ignoredPaths.includes(routerPath)) {
+    const isIgnoredPath = ignoredPaths.some((ignoredPath) => {
+      if (typeof ignoredPath === 'string') {
+        return ignoredPath === routerPath;
+      } else if (ignoredPath instanceof RegExp) {
+        return ignoredPath.test(routerPath);
+      }
+      return false;
+    });
+    if (isIgnoredPath) {
       return true;
     }
     return ignore ? ignore(request) : false;

@@ -54,6 +54,18 @@ export const buildFastify = (options: FastifyServerOptions = {}): FastifyInstanc
 };
 ```
 
+### Options
+
+```ts
+type FastifyRequestLoggerOptions = {
+  logBody?: boolean;
+  logBindings?: Record<string, unknown>;
+  ignoredPaths?: Array<string | RegExp>;
+  ignoredBindings?: Record<string, unknown>;
+  ignore?: (request: FastifyRequest) => boolean;
+};
+```
+
 ## Authors
 
 - [Olivier Louvignes](https://github.com/mgcrea) <<olivier@mgcrea.io>>
