@@ -15,6 +15,7 @@ specifiers:
   fastify: ^4.11.0
   fastify-plugin: ^4.4.0
   jest: ^29.3.1
+  pino: ^8.8.0
   pino-pretty: ^9.1.1
   prettier: ^2.8.2
   rimraf: ^3.0.2
@@ -39,6 +40,7 @@ devDependencies:
   eslint-plugin-prettier: 4.2.1_iu5s7nk6dw7o3tajefwfiqfmge
   fastify: 4.11.0
   jest: 29.3.1_@types+node@18.11.18
+  pino: 8.8.0
   pino-pretty: 9.1.1
   prettier: 2.8.2
   rimraf: 3.0.2
