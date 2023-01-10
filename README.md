@@ -18,7 +18,7 @@
   <a href="https://github.com/mgcrea/fastify-request-logger/actions/workflows/main.yml">
     <img src="https://img.shields.io/github/actions/workflow/status/mgcrea/fastify-request-logger/main.yml?style=for-the-badge&branch=master" alt="build status" />
   </a>
-    <a href="https://depfu.com/github/mgcrea/fastify-request-logger">
+  <a href="https://depfu.com/github/mgcrea/fastify-request-logger">
     <img src="https://img.shields.io/depfu/dependencies/github/mgcrea/fastify-request-logger?style=for-the-badge" alt="dependencies status" />
   </a>
 </p>
