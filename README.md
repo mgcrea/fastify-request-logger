@@ -37,7 +37,13 @@ import prettifier from '@mgcrea/pino-pretty-compact';
 
 export const buildFastify = (options: FastifyServerOptions = {}): FastifyInstance => {
   const fastify = createFastify({
-    logger: { level: 'debug', transport: { target: '@mgcrea/pino-pretty-compact', options: {} } },
+    logger: {
+      level: 'debug',
+      transport: {
+        target: '@mgcrea/pino-pretty-compact',
+        options: { translateTime: 'HH:MM:ss Z', ignore: 'pid,hostname' },
+      },
+    },
     disableRequestLogging: true,
     ...options,
   });
