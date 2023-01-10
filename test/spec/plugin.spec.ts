@@ -1,4 +1,5 @@
 import { buildFastify } from "test/fixtures";
+import { afterAll, describe, expect, it } from "vitest";
 
 describe("with fastify path", () => {
   const context = new Map<string, any>([

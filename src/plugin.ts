@@ -4,7 +4,7 @@ import type pino from "pino";
 
 export type FastifyRequestLoggerOptions = {
   logBody?: boolean;
-  logDuration?: boolean;
+  logResponseTime?: boolean;
   logBindings?: Record<string, unknown>;
   ignoredPaths?: Array<string | RegExp>;
   ignoredBindings?: Record<string, unknown>;
@@ -17,7 +17,7 @@ export const plugin: FastifyPluginAsync<FastifyRequestLoggerOptions> = async (
 ): Promise<void> => {
   const {
     logBody = true,
-    logDuration = true,
+    logResponseTime = true,
     logBindings = { plugin: "fastify-request-logger" },
     ignoredPaths = [],
     ignore,
@@ -77,7 +77,7 @@ export const plugin: FastifyPluginAsync<FastifyRequestLoggerOptions> = async (
       `${chalk.bold.yellow("→")}${chalk.yellow(request.method)}:${chalk.green(
         request.url
       )} response with a ${chalk.magenta(reply.statusCode)}-status${
-        logDuration ? ` took ${chalk.magenta(reply.getResponseTime().toFixed(3))}ms` : ""
+        logResponseTime ? ` took ${chalk.magenta(reply.getResponseTime().toFixed(3))}ms` : ""
       }`
     );
   });
