@@ -2,9 +2,8 @@
 
 [![npm version](https://img.shields.io/npm/v/@mgcrea/fastify-request-logger.svg)](https://github.com/mgcrea/fastify-request-logger/releases)
 [![license](https://img.shields.io/npm/l/@mgcrea/fastify-request-logger)](https://tldrlegal.com/license/mit-license)
-[![build status](https://img.shields.io/github/workflow/status/mgcrea/fastify-request-logger/ci)](https://github.com/mgcrea/fastify-request-logger/actions)
-[![dependencies status](https://img.shields.io/david/mgcrea/fastify-request-logger)](https://david-dm.org/mgcrea/fastify-request-logger)
-[![devDependencies status](https://img.shields.io/david/dev/mgcrea/fastify-request-logger)](https://david-dm.org/mgcrea/fastify-request-logger?type=dev)
+[![build status](https://img.shields.io/github/actions/workflow/status/mgcrea/fastify-request-logger/main.yml?branch=master)](https://github.com/mgcrea/fastify-request-logger/actions)
+[![dependencies status](https://img.shields.io/depfu/dependencies/github/mgcrea/fastify-request-logger)](https://depfu.com/github/mgcrea/fastify-request-logger)
 
 Compact request logger plugin for [fastify](https://github.com/fastify/fastify).
 
@@ -26,7 +25,7 @@ Compact request logger plugin for [fastify](https://github.com/fastify/fastify).
 ```bash
 npm install @mgcrea/fastify-request-logger @mgcrea/pino-pretty-compact --save
 # or
-yarn add @mgcrea/fastify-request-logger @mgcrea/pino-pretty-compact
+pnpm add @mgcrea/fastify-request-logger @mgcrea/pino-pretty-compact
 ```
 
 You probably want to disable fastify own request logging using the `disableRequestLogging` option.
@@ -38,7 +37,7 @@ import prettifier from '@mgcrea/pino-pretty-compact';
 
 export const buildFastify = (options: FastifyServerOptions = {}): FastifyInstance => {
   const fastify = createFastify({
-    logger: { prettyPrint: true, prettifier },
+    logger: { level: 'debug', transport: { target: '@mgcrea/pino-pretty-compact', options: {} } },
     disableRequestLogging: true,
     ...options,
   });

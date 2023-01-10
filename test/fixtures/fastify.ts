@@ -30,11 +30,11 @@ export const buildFastify = (options: BuilfFastifyOptions = {}): FastifyInstance
     reply.send({ hello: 'world', method: request.method });
   });
 
-  fastify.get('/healthz', (request, reply) => {
+  fastify.get('/healthz', (_request, reply) => {
     reply.send({ ok: 1 });
   });
 
-  fastify.get('/users/:user', (request, reply) => {
+  fastify.get('/users/:user', (_request, reply) => {
     reply.send({ ok: 1 });
   });
 

@@ -1,6 +1,6 @@
 import chalk from 'chalk';
 import type { FastifyPluginAsync, FastifyRequest } from 'fastify';
-import type { Bindings } from 'pino';
+import type pino from 'pino';
 
 export type FastifyRequestLoggerOptions = {
   logBody?: boolean;
@@ -30,7 +30,7 @@ export const plugin: FastifyPluginAsync<FastifyRequestLoggerOptions> = async (fa
   fastify.addHook('onRequest', async (request) => {
     if (isIgnoredRequest(request)) {
       if (ignoredBindings) {
-        request.log.setBindings(ignoredBindings);
+        (request.log as pino.Logger).setBindings(ignoredBindings);
       }
       return;
     }
@@ -67,9 +67,3 @@ export const plugin: FastifyPluginAsync<FastifyRequestLoggerOptions> = async (fa
     );
   });
 };
-
-declare module 'fastify' {
-  interface FastifyLoggerInstance {
-    setBindings(bindings: Bindings): void;
-  }
-}
