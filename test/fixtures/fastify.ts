@@ -1,16 +1,16 @@
-import createFastify, { FastifyInstance, FastifyServerOptions } from 'fastify';
-import fastifyRequestLogger, { FastifyRequestLoggerOptions } from 'src/index';
+import createFastify, { FastifyInstance, FastifyServerOptions } from "fastify";
+import fastifyRequestLogger, { FastifyRequestLoggerOptions } from "src/index";
 
 type BuilfFastifyOptions = FastifyServerOptions & { requestLogger?: FastifyRequestLoggerOptions };
 
-const logger: FastifyServerOptions['logger'] = {
-  level: 'debug',
+const logger: FastifyServerOptions["logger"] = {
+  level: "debug",
   transport: {
-    target: 'pino-pretty',
+    target: "pino-pretty",
     options: {
       colorize: true,
-      translateTime: 'yyyy-mm-dd HH:MM:ss.l',
-      ignore: 'pid,hostname',
+      translateTime: "yyyy-mm-dd HH:MM:ss.l",
+      ignore: "pid,hostname",
       levelFirst: true,
     },
   },
@@ -22,19 +22,19 @@ export const buildFastify = (options: BuilfFastifyOptions = {}): FastifyInstance
 
   fastify.register(fastifyRequestLogger, requestLoggerOptions);
 
-  fastify.get('/', (request, reply) => {
-    reply.send({ hello: 'world', method: request.method });
+  fastify.get("/", (request, reply) => {
+    reply.send({ hello: "world", method: request.method });
   });
 
-  fastify.post('/', (request, reply) => {
-    reply.send({ hello: 'world', method: request.method });
+  fastify.post("/", (request, reply) => {
+    reply.send({ hello: "world", method: request.method });
   });
 
-  fastify.get('/healthz', (_request, reply) => {
+  fastify.get("/healthz", (_request, reply) => {
     reply.send({ ok: 1 });
   });
 
-  fastify.get('/users/:user', (_request, reply) => {
+  fastify.get("/users/:user", (_request, reply) => {
     reply.send({ ok: 1 });
   });
 

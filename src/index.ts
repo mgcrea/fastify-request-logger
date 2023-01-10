@@ -1,9 +1,9 @@
-import fastifyPlugin from 'fastify-plugin';
-import { plugin } from './plugin';
+import fastifyPlugin from "fastify-plugin";
+import { plugin } from "./plugin";
 
-export { FastifyRequestLoggerOptions } from './plugin';
+export { FastifyRequestLoggerOptions } from "./plugin";
 
 export default fastifyPlugin(plugin, {
-  fastify: '4.x',
-  name: 'fastify-request-logger',
+  fastify: "4.x",
+  name: "fastify-request-logger",
 });
