@@ -1,6 +1,6 @@
 {
   "name": "@mgcrea/fastify-request-logger",
-  "version": "0.7.2",
+  "version": "1.0.0",
   "description": "Compact request logger plugin for fastify written in TypeScript",
   "author": "Olivier Louvignes <olivier@mgcrea.io>",
   "repository": "github:mgcrea/fastify-request-logger",
