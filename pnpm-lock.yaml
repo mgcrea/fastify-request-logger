@@ -17,7 +17,6 @@ specifiers:
   pino: ^8.8.0
   pino-pretty: ^9.1.1
   prettier: ^2.8.2
-  rimraf: ^3.0.2
   ts-jest: ^29.0.3
   tsup: ^6.5.0
   typescript: ^4.9.4
@@ -41,7 +40,6 @@ devDependencies:
   pino: 8.8.0
   pino-pretty: 9.1.1
   prettier: 2.8.2
-  rimraf: 3.0.2
   ts-jest: 29.0.3_p6ekqnroyms5nhqbfxosryz7rm
   tsup: 6.5.0_typescript@4.9.4
   typescript: 4.9.4
