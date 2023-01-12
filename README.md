@@ -28,7 +28,7 @@
 
 Compact request logger plugin for [fastify](https://github.com/fastify/fastify).
 
-- Relies on [chalk](https://github.com/chalk/chalk) for the coloring.
+- Relies on [kolorist](https://github.com/marvinhagemeister/kolorist) for the coloring.
 
 - Usually used along [@mgcrea/pino-pretty-compact](https://github.com/mgcrea/pino-pretty-compact) to prettify logs.
 
