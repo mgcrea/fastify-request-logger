@@ -1,5 +1,5 @@
-import chalk from "chalk";
 import type { FastifyPluginAsync, FastifyRequest } from "fastify";
+import * as color from "kolorist";
 import type pino from "pino";
 
 export type FastifyRequestLoggerOptions = {
@@ -15,6 +15,9 @@ export const plugin: FastifyPluginAsync<FastifyRequestLoggerOptions> = async (
   fastify,
   options = {}
 ): Promise<void> => {
+  const supportsArt = false && color.options.supportLevel === 2; /* SupportLevel.ansi256 */
+  const icons = { req: supportsArt ? "←" : "<", res: supportsArt ? "→" : ">" };
+
   const {
     logBody = true,
     logResponseTime = true,
@@ -50,10 +53,10 @@ export const plugin: FastifyPluginAsync<FastifyRequestLoggerOptions> = async (
     const contentLength = request.headers["content-length"];
     request.log.info(
       logBindings,
-      `${chalk.bold.yellow("←")}${chalk.yellow(request.method)}:${chalk.green(
+      `${color.bold(color.yellow(icons.req))}${color.yellow(request.method)}:${color.green(
         request.url
-      )} request from ip ${chalk.blue(request.ip)}${
-        contentLength ? ` with a ${chalk.yellow(contentLength)}-length body` : ""
+      )} request from ip ${color.blue(request.ip)}${
+        contentLength ? ` with a ${color.yellow(contentLength)}-length body` : ""
       }`
     );
     request.log.trace({ ...logBindings, req: request }, `Request trace`);
@@ -74,10 +77,10 @@ export const plugin: FastifyPluginAsync<FastifyRequestLoggerOptions> = async (
     }
     request.log.info(
       logBindings,
-      `${chalk.bold.yellow("→")}${chalk.yellow(request.method)}:${chalk.green(
+      `${color.bold(color.yellow(icons.res))}${color.yellow(request.method)}:${color.green(
         request.url
-      )} response with a ${chalk.magenta(reply.statusCode)}-status${
-        logResponseTime ? ` took ${chalk.magenta(reply.getResponseTime().toFixed(3))}ms` : ""
+      )} response with a ${color.magenta(reply.statusCode)}-status${
+        logResponseTime ? ` took ${color.magenta(reply.getResponseTime().toFixed(3))}ms` : ""
       }`
     );
   });

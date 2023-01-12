@@ -1,15 +1,22 @@
+import { fsyncSync } from "node:fs";
 import { buildFastify } from "test/fixtures";
-import { afterAll, describe, expect, it } from "vitest";
+import { afterAll, beforeAll, describe, expect, it } from "vitest";
+
+let fastify: ReturnType<typeof buildFastify>;
+beforeAll(() => {
+  fastify = buildFastify({ requestLogger: { ignoredPaths: ["/healthz"] } });
+});
+afterAll(() => {
+  fastify.close();
+  fsyncSync(1);
+});
 
 describe("with fastify path", () => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const context = new Map<string, any>([
     ["payload", { foo: "bar" }],
     ["token", "abc"],
   ]);
-  const fastify = buildFastify({ requestLogger: { ignoredPaths: ["/healthz"] } });
-  afterAll(() => {
-    fastify.close();
-  });
   it("should properly log a GET request", async () => {
     const response = await fastify.inject({
       method: "GET",
