@@ -69,7 +69,7 @@ export const buildFastify = (options: FastifyServerOptions = {}): FastifyInstanc
     ...options,
   });
 
-  fastify.register(fastifyRequestLogger);
+  fastify.register(fastifyRequestLogger, { logBindings: { plugin: '' } });
 
   return fastify;
 };
