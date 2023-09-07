@@ -25,7 +25,7 @@ describe("with fastify path", () => {
         authorization: `Bearer ${context.get("token")}`,
       },
     });
-    expect(response.statusCode).toEqual(200);
+    expect(response.statusCode).toBe(200);
   });
   it("should properly log a POST request", async () => {
     const response = await fastify.inject({
@@ -33,7 +33,7 @@ describe("with fastify path", () => {
       url: "/",
       payload: context.get("payload"),
     });
-    expect(response.statusCode).toEqual(200);
+    expect(response.statusCode).toBe(200);
   });
   it("should properly ignore a specified request", async () => {
     const response = await fastify.inject({
@@ -43,7 +43,7 @@ describe("with fastify path", () => {
         authorization: `Bearer ${context.get("token")}`,
       },
     });
-    expect(response.statusCode).toEqual(200);
+    expect(response.statusCode).toBe(200);
   });
   it("should properly support request with params", async () => {
     const response = await fastify.inject({
@@ -53,6 +53,6 @@ describe("with fastify path", () => {
         authorization: `Bearer ${context.get("token")}`,
       },
     });
-    expect(response.statusCode).toEqual(200);
+    expect(response.statusCode).toBe(200);
   });
 });

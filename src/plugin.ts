@@ -13,7 +13,7 @@ export type FastifyRequestLoggerOptions = {
 
 export const plugin: FastifyPluginAsync<FastifyRequestLoggerOptions> = async (
   fastify,
-  options = {}
+  options = {},
 ): Promise<void> => {
   const supportsArt = color.options.supportLevel === 2; /* SupportLevel.ansi256 */
   const icons = { req: supportsArt ? "←" : "<", res: supportsArt ? "→" : ">" };
@@ -54,10 +54,10 @@ export const plugin: FastifyPluginAsync<FastifyRequestLoggerOptions> = async (
     request.log.info(
       logBindings,
       `${color.bold(color.yellow(icons.req))}${color.yellow(request.method)}:${color.green(
-        request.url
+        request.url,
       )} request from ip ${color.blue(request.ip)}${
         contentLength ? ` with a ${color.yellow(contentLength)}-length body` : ""
-      }`
+      }`,
     );
     request.log.trace({ ...logBindings, req: request }, `Request trace`);
   });
@@ -78,10 +78,10 @@ export const plugin: FastifyPluginAsync<FastifyRequestLoggerOptions> = async (
     request.log.info(
       logBindings,
       `${color.bold(color.yellow(icons.res))}${color.yellow(request.method)}:${color.green(
-        request.url
+        request.url,
       )} response with a ${color.magenta(reply.statusCode)}-status${
         logResponseTime ? ` took ${color.magenta(reply.getResponseTime().toFixed(3))}ms` : ""
-      }`
+      }`,
     );
   });
 };

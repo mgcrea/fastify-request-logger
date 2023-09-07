@@ -5,7 +5,6 @@ describe("module", () => {
     const module = await import("../../src");
     expect(Object.keys(module)).toMatchInlineSnapshot(`
       [
-        "FastifyRequestLoggerOptions",
         "default",
       ]
     `);
