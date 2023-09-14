@@ -28,12 +28,12 @@ export const plugin: FastifyPluginAsync<FastifyRequestLoggerOptions> = async (
   } = options;
 
   const isIgnoredRequest = (request: FastifyRequest): boolean => {
-    const { routerPath } = request;
+    const { url } = request.routeOptions;
     const isIgnoredPath = ignoredPaths.some((ignoredPath) => {
       if (typeof ignoredPath === "string") {
-        return ignoredPath === routerPath;
+        return ignoredPath === url;
       } else if (ignoredPath instanceof RegExp) {
-        return ignoredPath.test(routerPath);
+        return ignoredPath.test(url);
       }
       return false;
     });
