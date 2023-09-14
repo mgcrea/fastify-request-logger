@@ -5,8 +5,8 @@
     "moduleResolution": "Bundler",
     "baseUrl": ".",
     "paths": {
-      "src/*": ["./src/*"],
-      "test/*": ["./test/*"]
+      "src/*": ["src/*"],
+      "test/*": ["test/*"]
     }
   },
   "include": ["src", "test"]
