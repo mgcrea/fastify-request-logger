@@ -15,7 +15,7 @@ export const plugin: FastifyPluginAsync<FastifyRequestLoggerOptions> = async (
   fastify,
   options = {},
 ): Promise<void> => {
-  const supportsArt = color.options.supportLevel === 2; /* SupportLevel.ansi256 */
+  const supportsArt = color.options.supportLevel >= 2; /* SupportLevel.ansi256 */
   const icons = { req: supportsArt ? "←" : "<", res: supportsArt ? "→" : ">" };
 
   const {
