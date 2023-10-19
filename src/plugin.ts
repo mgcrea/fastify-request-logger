@@ -67,7 +67,11 @@ export const plugin: FastifyPluginAsync<FastifyRequestLoggerOptions> = async (
       return;
     }
     if (request.body && logBody) {
-      request.log.debug({ ...logBindings, body: request.body }, `Request body`);
+      if (Buffer.isBuffer(request.body)) {
+        request.log.debug({ ...logBindings, body: `<Buffer ${request.body.length} bytes>` }, `Request body`);
+      } else {
+        request.log.debug({ ...logBindings, body: request.body }, `Request body`);
+      }
     }
   });
 
