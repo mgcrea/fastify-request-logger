@@ -84,7 +84,7 @@ export const plugin: FastifyPluginAsync<FastifyRequestLoggerOptions> = async (
       `${color.bold(color.yellow(icons.res))}${color.yellow(request.method)}:${color.green(
         request.url,
       )} response with a ${color.magenta(reply.statusCode)}-status${
-        logResponseTime ? ` took ${color.magenta(reply.getResponseTime().toFixed(3))}ms` : ""
+        logResponseTime ? ` took ${color.magenta(reply.elapsedTime.toFixed(3))}ms` : ""
       }`,
     );
   });

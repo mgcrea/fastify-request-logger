@@ -26,7 +26,7 @@
     "prettycheck": "prettier --check src/ test/",
     "prettify": "prettier --write src/ test/",
     "typecheck": "tsc --noEmit",
-    "spec": "rimraf node_modules/.vitest; vitest --run --no-threads --no-isolate",
+    "spec": "rimraf node_modules/.vitest; vitest --run --pool=forks --no-isolate",
     "test": "npm run lint && npm run prettycheck && npm run typecheck && npm run spec",
     "prepublishOnly": "npm run build"
   },
@@ -36,20 +36,20 @@
     "logger"
   ],
   "devDependencies": {
-    "@mgcrea/eslint-config-node": "^0.8.3",
-    "@tsconfig/node-lts": "^18.12.5",
+    "@mgcrea/eslint-config-node": "^0.9.5",
+    "@tsconfig/node-lts": "^20.1.1",
     "@tsconfig/strictest": "^2.0.2",
-    "@types/node": "^18.18.6",
-    "eslint": "^8.51.0",
-    "fastify": "^4.24.3",
-    "pino": "^8.16.0",
-    "pino-pretty": "^10.2.3",
-    "prettier": "^3.0.3",
-    "prettier-plugin-organize-imports": "^3.2.3",
+    "@types/node": "^20.11.14",
+    "eslint": "^8.56.0",
+    "fastify": "^4.26.0",
+    "pino": "^8.17.2",
+    "pino-pretty": "^10.3.1",
+    "prettier": "^3.2.4",
+    "prettier-plugin-organize-imports": "^3.2.4",
     "rimraf": "^5.0.5",
-    "tsup": "^7.2.0",
-    "typescript": "^5.2.2",
-    "vitest": "^0.34.6"
+    "tsup": "^8.0.1",
+    "typescript": "^5.3.3",
+    "vitest": "^1.2.2"
   },
   "dependencies": {
     "fastify-plugin": "^4.5.1",
