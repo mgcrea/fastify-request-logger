@@ -33,7 +33,7 @@ export const plugin: FastifyPluginAsync<FastifyRequestLoggerOptions> = async (
       if (typeof ignoredPath === "string") {
         return ignoredPath === url;
       } else if (ignoredPath instanceof RegExp) {
-        return ignoredPath.test(url);
+        return ignoredPath.test(url ?? "");
       }
       return false;
     });
@@ -66,10 +66,11 @@ export const plugin: FastifyPluginAsync<FastifyRequestLoggerOptions> = async (
     if (isIgnoredRequest(request)) {
       return;
     }
+    const isJson = request.headers["content-type"]?.includes("application/json");
     if (request.body && logBody) {
       if (Buffer.isBuffer(request.body)) {
         request.log.debug({ ...logBindings, body: `<Buffer ${request.body.length} bytes>` }, `Request body`);
-      } else {
+      } else if (isJson) {
         request.log.debug({ ...logBindings, body: request.body }, `Request body`);
       }
     }

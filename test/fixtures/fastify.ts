@@ -24,11 +24,19 @@ export const buildFastify = (options: BuilfFastifyOptions = {}): FastifyInstance
 
   fastify.register(fastifyRequestLogger, requestLoggerOptions);
 
+  fastify.addContentTypeParser(/^image\/.*/, { bodyLimit: 16 * 1024 ** 2 }, (_req, incomingMessage, done) => {
+    done(null, incomingMessage);
+  });
+
   fastify.get("/", (request, reply) => {
     reply.send({ hello: "world", method: request.method });
   });
 
   fastify.post("/", (request, reply) => {
+    reply.send({ hello: "world", method: request.method });
+  });
+
+  fastify.post("/upload", (request, reply) => {
     reply.send({ hello: "world", method: request.method });
   });
 

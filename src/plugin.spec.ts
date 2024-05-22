@@ -1,4 +1,4 @@
-import { fsyncSync } from "node:fs";
+import { createReadStream, fsyncSync } from "node:fs";
 import { buildFastify } from "test/fixtures";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 
@@ -32,6 +32,18 @@ describe("with fastify path", () => {
       method: "POST",
       url: "/",
       payload: context.get("payload"),
+    });
+    expect(response.statusCode).toBe(200);
+  });
+  it("should properly log a POST request with an upload", async () => {
+    const readStream = createReadStream(`test/fixtures/sample.jpg`);
+    const response = await fastify.inject({
+      method: "POST",
+      url: "/upload",
+      body: readStream,
+      headers: {
+        "content-type": "image/jpeg",
+      },
     });
     expect(response.statusCode).toBe(200);
   });
