@@ -80,16 +80,17 @@ export const plugin: FastifyPluginAsync<FastifyRequestLoggerOptions> = async (
     if (isIgnoredRequest(request)) {
       return;
     }
-    const isError = reply.statusCode && reply.statusCode >= 400;
-    const isInternal = reply.statusCode && reply.statusCode >= 500;
-    const log = isError ? (isInternal ? request.log.error : request.log.warn) : request.log.info;
-    log(
-      logBindings,
-      `${color.bold(color.yellow(icons.res))}${color.yellow(request.method)}:${color.green(
-        request.url,
-      )} response with a ${color.magenta(reply.statusCode)}-status${
-        logResponseTime ? ` took ${color.magenta(reply.elapsedTime.toFixed(3))}ms` : ""
-      }`,
-    );
+    const message = `${color.bold(color.yellow(icons.res))}${color.yellow(request.method)}:${color.green(
+      request.url,
+    )} response with a ${color.magenta(reply.statusCode)}-status${
+      logResponseTime ? ` took ${color.magenta(reply.elapsedTime.toFixed(3))}ms` : ""
+    }`;
+    if (reply.statusCode && reply.statusCode >= 500) {
+      request.log.error(logBindings, message);
+    } else if (reply.statusCode && reply.statusCode >= 400) {
+      request.log.warn(logBindings, message);
+    } else {
+      request.log.info(logBindings, message);
+    }
   });
 };
