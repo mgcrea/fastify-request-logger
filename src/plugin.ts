@@ -80,7 +80,9 @@ export const plugin: FastifyPluginAsync<FastifyRequestLoggerOptions> = async (
     if (isIgnoredRequest(request)) {
       return;
     }
-    request.log.info(
+    const isError = reply.statusCode && reply.statusCode >= 400;
+    const log = isError ? request.log.warn : request.log.info;
+    log(
       logBindings,
       `${color.bold(color.yellow(icons.res))}${color.yellow(request.method)}:${color.green(
         request.url,
