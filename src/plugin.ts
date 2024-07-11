@@ -81,7 +81,8 @@ export const plugin: FastifyPluginAsync<FastifyRequestLoggerOptions> = async (
       return;
     }
     const isError = reply.statusCode && reply.statusCode >= 400;
-    const log = isError ? request.log.warn : request.log.info;
+    const isInternal = reply.statusCode && reply.statusCode >= 500;
+    const log = isError ? (isInternal ? request.log.error : request.log.warn) : request.log.info;
     log(
       logBindings,
       `${color.bold(color.yellow(icons.res))}${color.yellow(request.method)}:${color.green(
