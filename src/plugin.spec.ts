@@ -6,8 +6,8 @@ let fastify: ReturnType<typeof buildFastify>;
 beforeAll(() => {
   fastify = buildFastify({ requestLogger: { ignoredPaths: ["/healthz"] } });
 });
-afterAll(() => {
-  fastify.close();
+afterAll(async () => {
+  await fastify.close();
   fsyncSync(1);
 });
 

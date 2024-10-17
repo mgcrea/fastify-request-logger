@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/require-await */
 import type { FastifyPluginAsync, FastifyRequest } from "fastify";
 import * as color from "kolorist";
 import type pino from "pino";
@@ -6,7 +7,7 @@ export type FastifyRequestLoggerOptions = {
   logBody?: boolean;
   logResponseTime?: boolean;
   logBindings?: Record<string, unknown>;
-  ignoredPaths?: Array<string | RegExp>;
+  ignoredPaths?: (string | RegExp)[];
   ignoredBindings?: Record<string, unknown>;
   ignore?: (request: FastifyRequest) => boolean;
 };
@@ -15,6 +16,7 @@ export const plugin: FastifyPluginAsync<FastifyRequestLoggerOptions> = async (
   fastify,
   options = {},
 ): Promise<void> => {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-enum-comparison
   const supportsArt = color.options.supportLevel >= 2; /* SupportLevel.ansi256 */
   const icons = { req: supportsArt ? "←" : "<", res: supportsArt ? "→" : ">" };
 
