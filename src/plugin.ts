@@ -95,4 +95,18 @@ export const plugin: FastifyPluginAsync<FastifyRequestLoggerOptions> = async (
       request.log.info(logBindings, message);
     }
   });
+
+  fastify.addHook("onError", async (request, reply, error) => {
+    if (isIgnoredRequest(request)) {
+      return;
+    }
+
+    if (error.statusCode && error.statusCode >= 500) {
+      request.log.error({ ...logBindings, req: request, res: reply, err: error }, error?.message);
+    } else if (reply.statusCode && reply.statusCode >= 400) {
+      request.log.warn({ ...logBindings, res: reply, err: error }, error?.message);
+    } else {
+      request.log.info({ ...logBindings, res: reply, err: error }, error?.message);
+    }
+  });
 };
