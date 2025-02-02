@@ -10,16 +10,16 @@ export type FastifyRequestLoggerOptions = {
   ignoredPaths?: (string | RegExp)[];
   ignoredBindings?: Record<string, unknown>;
   ignore?: (request: FastifyRequest) => boolean;
+  supportsArt?: boolean;
 };
+
+const IS_WINDOWS = process.platform === "win32";
+const IS_POWERSHELL = IS_WINDOWS && Boolean(process.env["PSModulePath"]);
 
 export const plugin: FastifyPluginAsync<FastifyRequestLoggerOptions> = async (
   fastify,
   options = {},
 ): Promise<void> => {
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-enum-comparison
-  const supportsArt = color.options.supportLevel >= 2; /* SupportLevel.ansi256 */
-  const icons = { req: supportsArt ? "←" : "<", res: supportsArt ? "→" : ">" };
-
   const {
     logBody = true,
     logResponseTime = true,
@@ -27,7 +27,11 @@ export const plugin: FastifyPluginAsync<FastifyRequestLoggerOptions> = async (
     ignoredPaths = [],
     ignore,
     ignoredBindings,
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-enum-comparison
+    supportsArt = !IS_POWERSHELL && color.options.supportLevel >= 2 /* SupportLevel.ansi256 */,
   } = options;
+
+  const icons = { req: supportsArt ? "←" : "<", res: supportsArt ? "→" : ">" };
 
   const isIgnoredRequest = (request: FastifyRequest): boolean => {
     const { url } = request.routeOptions;
