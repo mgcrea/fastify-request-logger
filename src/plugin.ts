@@ -14,7 +14,7 @@ export type FastifyRequestLoggerOptions = {
 };
 
 const IS_WINDOWS = process.platform === "win32";
-const IS_POWERSHELL = IS_WINDOWS && Boolean(process.env["PSModulePath"]);
+const IS_POWERSHELL = IS_WINDOWS && Boolean(process.env["PSModulePath"] ?? process.env["PSHOME"]);
 
 export const plugin: FastifyPluginAsync<FastifyRequestLoggerOptions> = async (
   fastify,
